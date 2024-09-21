@@ -14,7 +14,7 @@ TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
 
-# 子弹类
+# Bullet class
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, bullet_img, init_pos):
         pygame.sprite.Sprite.__init__(self)
@@ -26,19 +26,19 @@ class Bullet(pygame.sprite.Sprite):
     def move(self):
         self.rect.top -= self.speed
 
-# 玩家类
+# Player class
 class Player(pygame.sprite.Sprite):
     def __init__(self, plane_img, player_rect, init_pos):
         pygame.sprite.Sprite.__init__(self)
-        self.image = []                                 # 用来存储玩家对象精灵图片的列表
+        self.image = []  # List to store player sprite images
         for i in range(len(player_rect)):
             self.image.append(plane_img.subsurface(player_rect[i]).convert_alpha())
-        self.rect = player_rect[0]                      # 初始化图片所在的矩形
-        self.rect.topleft = init_pos                    # 初始化矩形的左上角坐标
-        self.speed = 8                                  # 初始化玩家速度，这里是一个确定的值
-        self.bullets = pygame.sprite.Group()            # 玩家飞机所发射的子弹的集合
-        self.img_index = 0                              # 玩家精灵图片索引
-        self.is_hit = False                             # 玩家是否被击中
+        self.rect = player_rect[0]  # Initialize the rectangle for the image
+        self.rect.topleft = init_pos  # Initialize the top-left corner coordinates of the rectangle
+        self.speed = 8  # Initialize player speed with a fixed value
+        self.bullets = pygame.sprite.Group()  # Group of bullets fired by the player's plane
+        self.img_index = 0  # Index for player sprite images
+        self.is_hit = False  # Whether the player is hit
 
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
@@ -68,7 +68,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.rect.left += self.speed
 
-# 敌人类
+# Enemy class
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, enemy_img, enemy_down_imgs, init_pos):
        pygame.sprite.Sprite.__init__(self)
